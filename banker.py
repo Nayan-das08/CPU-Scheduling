@@ -1,3 +1,7 @@
+def showMat(arr):
+    for i in range(len(arr)):
+        print(arr[i])
+
 n = int(input("Enter no. of processes : "))
 if (n <= 0):
     print("Kindly enter a number greater than 0")
@@ -7,20 +11,21 @@ m = int(input("Enter no. of resource types : "))
 if (n <= 0):
     print("Kindly enter a number greater than 0")
     exit()
-max = [[0]*m]*n
-need = [[0]*m]*n
-allocation = [[0]*m]*n
+max = []
+need = []#[[0]*m]*n
+allocation = []
 work = []
 available = []
 total = []
 
+# to be enetered by user
 print()
 for i in range(m):
     print(f"Enter instances of R{i} : ", end='')
     x = int(input())
     total.append(x)
 
-
+# to be enetered by user
 allocation = [
     [0,0,1,2],
     [2,0,0,0],
@@ -29,6 +34,7 @@ allocation = [
     [0,3,3,2],
 ]
 
+# to be enetered by user
 max = [
     [0,0,1,2],
     [2,7,5,0],
@@ -39,28 +45,41 @@ max = [
 
 # fill need[][]
 for i in range(len(allocation)):
+    x = []
     for j in range(m):
-        need[i][j] = max[i][j] - allocation[i][j]
+        x.append(max[i][j] - allocation[i][j])
+    need.append(x)    
 
-    
+print('\nallocation')
+showMat(allocation)
 
+print('\n\nmax')
+showMat(max)
+
+print('\n\nneed')
+showMat(need)
 
 for j in range(m):
     sum = 0
     for i in range(n):
-        sum = sum + allocation[i][0]
-        #print(allocation[i][0])
-    print(sum)
+        sum = sum + allocation[i][j]
     available.append(total[j] - sum)
 
-print(total)
-print(available)
-
-'''for i in range(len(allocation)):
-    print(allocation[i])
-
 print()
-for i in range(len(max)):
-    print(max[i])
-'''    
-    
+print(f'total       = {total}')
+print(f"available   = {available}")
+
+# SAFETY ALGORITHM
+work = available[:]
+finish = [False]*n
+
+
+
+
+
+5
+4
+6
+7
+12
+12
