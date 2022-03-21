@@ -72,10 +72,27 @@ print(f"available   = {available}")
 # SAFETY ALGORITHM
 work = available[:]
 finish = [False]*n
+temp = need[:]
+
+print()
 
 
-
-
+for i in range(n):
+#i = 0
+    if (finish[i] == False):    
+        flag = 1
+        for j in range(m):
+            if need[i][j] > work[j]:
+                flag = 0
+                print(i,j)
+                #break        
+        
+        if flag == 1:   # found P[i] where finish[i] is false and need[i] < work
+            print(f'P{i}', end='')
+            for j in range(m):
+                work[j] = work[j] + allocation[i][j]
+            finish[i] = True
+            print(f'\t{work}')
 
 5
 4
